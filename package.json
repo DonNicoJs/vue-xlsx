@@ -4,7 +4,7 @@
   "private": true,
   "author": "Nicolo Maria Mezzopera",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "rollup -c --environment NODE_ENV:production",
     "prepare": "npm run build",
     "lint": "vue-cli-service lint",
@@ -49,11 +49,11 @@
   "license": "MIT",
   "lint-staged": {
     "*.js": [
-      "eslint",
+      "vue-cli-service lint",
       "git add"
     ],
     "*.vue": [
-      "eslint",
+      "vue-cli-service lint",
       "git add"
     ]
   },
