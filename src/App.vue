@@ -1,16 +1,20 @@
 <template>
   <div class="VueXlsx">
     <input type="file" @change="onChange" />
-    <xlsx-parse :file="file" />
+    <xlsx-parse :file="file">
+      <xlsx-table />
+    </xlsx-parse>
   </div>
 </template>
 
 <script>
 import XlsxParse from "./components/XlsxParse";
+import XlsxTable from "./components/XlsxTable";
 
 export default {
   components: {
-    XlsxParse
+    XlsxParse,
+    XlsxTable
   },
   data() {
     return {
