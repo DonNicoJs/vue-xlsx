@@ -1,0 +1,69 @@
+{
+  "name": "vue-xlsx",
+  "version": "0.0.1",
+  "description": "Vue xlsx library",
+  "author": "Nicolo Maria Mezzopera",
+  "scripts": {
+    "build": "rollup -c --environment NODE_ENV:production",
+    "prepare": "npm run build",
+    "lint": "eslint --ext .js,.vue --ignore-path .eslintignore .",
+    "docs:serve": "docsify serve ./docs -p 4000 -o"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-eslint": "^8.2.6",
+    "eslint": "^5.12.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^5.1.0",
+    "husky": "^1.3.1",
+    "lint-staged": "^7.2.2",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-vue": "^4.6.1",
+    "vue": "^2.5.22",
+    "vue-template-compiler": "^2.5.22"
+  },
+  "files": [
+    "dist/"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "keywords": [
+  ],
+  "license": "MIT",
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "git add"
+    ],
+    "*.vue": [
+      "eslint",
+      "git add"
+    ]
+  },
+  "main": "dist/vue-xlsx.cjs.js",
+  "unpkg": "dist/vue-xlsx.umd.min.js",
+  "module": "dist/vue-xlsx.es.js",
+  "sideEffects": false,
+  "peerDependencies": {
+    "vue": "^2.5.17"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lordfuoco/vue-xlsx.git"
+  },
+}
