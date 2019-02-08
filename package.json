@@ -32,7 +32,8 @@
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-vue": "^4.6.1",
     "vue": "^2.5.22",
-    "vue-template-compiler": "^2.5.22"
+    "vue-template-compiler": "^2.5.22",
+    "xlsx": "^0.14.1"
   },
   "files": [
     "dist/"
@@ -42,8 +43,7 @@
       "pre-commit": "lint-staged"
     }
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "license": "MIT",
   "lint-staged": {
     "*.js": [
@@ -60,10 +60,11 @@
   "module": "dist/vue-xlsx.es.js",
   "sideEffects": false,
   "peerDependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "xlsx": "^0.14.1"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/lordfuoco/vue-xlsx.git"
-  },
+  }
 }
