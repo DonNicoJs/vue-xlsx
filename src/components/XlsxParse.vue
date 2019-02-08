@@ -37,7 +37,8 @@ export default {
   },
   provide() {
     return {
-      getWorkbook: this.getWorkbook
+      getWorkbook: this.getWorkbook,
+      getXlsxUtils: this.getXlsxUtils
     };
   },
   methods: {
@@ -74,6 +75,9 @@ export default {
         this._resolve = resolve;
         this._reject = reject;
       });
+    },
+    getXlsxUtils() {
+      return this._xlsx.utils;
     }
   }
 };
