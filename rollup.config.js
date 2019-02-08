@@ -1,16 +1,15 @@
-import vue from 'rollup-plugin-vue';
-import replace from 'rollup-plugin-replace';
-import node from 'rollup-plugin-node-resolve';
-import cjs from 'rollup-plugin-commonjs';
-import buble from 'rollup-plugin-buble';
-
+import vue from "rollup-plugin-vue";
+import replace from "rollup-plugin-replace";
+import node from "rollup-plugin-node-resolve";
+import cjs from "rollup-plugin-commonjs";
+import buble from "rollup-plugin-buble";
 
 export default [
   {
-    input: './src/index.js',
-    external: ['vue'],
+    input: "./src/index.js",
+    external: ["vue", "xlsx"],
     output: {
-      format: 'esm',
+      format: "esm",
       file: `dist/vue-xlsx.es.js`
     },
     plugins: [
@@ -25,16 +24,18 @@ export default [
     ]
   },
   {
-    input: 'src/index.js',
-    external: ['vue'],
-    output: [{
-      format: 'cjs',
-      file: 'dist/vue-xlsx.cjs.js'
-    }],
+    input: "src/index.js",
+    external: ["vue", "xlsx"],
+    output: [
+      {
+        format: "cjs",
+        file: "dist/vue-xlsx.cjs.js"
+      }
+    ],
     plugins: [
-      replace({ 'process.env.NODE_ENV': 'production' }),
+      replace({ "process.env.NODE_ENV": "production" }),
       node({
-        extensions: ['.vue', '.js']
+        extensions: [".vue", ".js"]
       }),
       cjs(),
       vue({
@@ -47,20 +48,20 @@ export default [
     ]
   },
   {
-    input: 'src/index.js',
-    external: ['vue'],
+    input: "src/index.js",
+    external: ["vue", "xlsx"],
     output: {
-      format: 'umd',
-      name: 'vue-xlsx',
-      file: 'dist/vue-xlsx.umd.min.js',
+      format: "umd",
+      name: "vue-xlsx",
+      file: "dist/vue-xlsx.umd.js",
       globals: {
-        vue: 'Vue',
+        vue: "Vue"
       }
     },
     plugins: [
-      replace({ 'process.env.NODE_ENV': 'production' }),
+      replace({ "process.env.NODE_ENV": "production" }),
       node({
-        extensions: ['.vue', '.js']
+        extensions: [".vue", ".js"]
       }),
       cjs(),
       vue({
