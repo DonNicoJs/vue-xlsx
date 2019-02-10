@@ -37,13 +37,13 @@ export default {
   },
   provide() {
     return {
-      getWorkbook: this.getWorkbook,
-      getXlsxUtils: this.getXlsxUtils
+      getWorkbook: this.getWorkbook
     };
   },
   methods: {
     async load() {
-      this._xlsx = await import("xlsx");
+      const { read } = await import("xlsx");
+      this._read = read;
       this.libLoaded = true;
     },
     parseFile(file) {
@@ -55,7 +55,7 @@ export default {
         for (var i = 0; i < length; i++) {
           binary += String.fromCharCode(bytes[i]);
         }
-        this._workbook = this._xlsx.read(binary, { type: "binary" });
+        this._workbook = this._read(binary, { type: "binary" });
         console.log(this._workbook);
         this.$emit("parsed", this._workbook);
         if (this._resolve) {
@@ -75,9 +75,6 @@ export default {
         this._resolve = resolve;
         this._reject = reject;
       });
-    },
-    getXlsxUtils() {
-      return this._xlsx.utils;
     }
   }
 };

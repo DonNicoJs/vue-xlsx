@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  inject: ["getWorkbook", "getXlsxUtils"],
+  inject: ["getWorkbook"],
   props: {
     sheet: {
       type: Number,
@@ -13,26 +13,41 @@ export default {
   },
   data() {
     return {
-      table: null
+      table: null,
+      loaded: false
     };
+  },
+  computed: {
+    loadedAndSheet() {
+      return this.loaded ? this.sheet : null;
+    }
   },
   mounted() {
     this._utils = this.getXlsxUtils();
   },
   watch: {
-    sheet: {
+    loadedAndSheet: {
       immediate: true,
-      handler() {
-        this.createTable();
+      handler(sheet) {
+        if (sheet) {
+          this.createTable();
+        }
       }
     }
   },
   methods: {
+    async load() {
+      const {
+        utils: { sheet_to_html }
+      } = await import("xlsx");
+      this._sheet_to_html = sheet_to_html;
+      this.loaded = true;
+    },
     async createTable() {
       const workbook = await this.getWorkbook();
       const sheetName = workbook.SheetNames[this.sheet];
       const ws = workbook.Sheets[sheetName];
-      this.table = this._utils.sheet_to_html(ws);
+      this.table = this._sheet_to_html(ws);
     }
   }
 };
