@@ -23,14 +23,14 @@ export default {
     }
   },
   mounted() {
-    this._utils = this.getXlsxUtils();
+    this.load();
   },
   watch: {
     loadedAndSheet: {
       immediate: true,
       handler(sheet) {
-        if (sheet) {
-          this.createTable();
+        if (sheet !== null) {
+          this.getWorkbook(this.updateTable);
         }
       }
     }
@@ -43,8 +43,7 @@ export default {
       this._sheet_to_html = sheet_to_html;
       this.loaded = true;
     },
-    async createTable() {
-      const workbook = await this.getWorkbook();
+    updateTable(workbook) {
       const sheetName = workbook.SheetNames[this.sheet];
       const ws = workbook.Sheets[sheetName];
       this.table = this._sheet_to_html(ws);

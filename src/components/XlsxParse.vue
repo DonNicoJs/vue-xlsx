@@ -45,6 +45,18 @@ export default {
       const { read } = await import("xlsx");
       this._read = read;
       this.libLoaded = true;
+      this._callbackQueue = [];
+    },
+    fireCallBacks() {
+      if (this._callbackQueue && Array.isArray(this._callbackQueue)) {
+        this._callbackQueue.forEach(cb => {
+          try {
+            cb(this._workbook);
+          } catch (e) {
+            console.warning("error in firing callbacks", e);
+          }
+        });
+      }
     },
     parseFile(file) {
       const reader = new FileReader();
@@ -56,25 +68,19 @@ export default {
           binary += String.fromCharCode(bytes[i]);
         }
         this._workbook = this._read(binary, { type: "binary" });
-        console.log(this._workbook);
+        this.fireCallBacks();
         this.$emit("parsed", this._workbook);
-        if (this._resolve) {
-          this._resolve(this._workbook);
-        }
       };
       reader.onerror = e => {
         console.log(e);
-        if (this._reject) {
-          this._reject(this._workbook);
-        }
       };
       reader.readAsArrayBuffer(file);
     },
-    getWorkbook() {
-      return new Promise((resolve, reject) => {
-        this._resolve = resolve;
-        this._reject = reject;
-      });
+    getWorkbook(cb) {
+      this._callbackQueue.push(cb);
+      if (this._workbook) {
+        cb(this._workbook);
+      }
     }
   }
 };
