@@ -1,7 +1,7 @@
 <template>
   <div class="VueXlsx">
     <input type="file" @change="onChange" />
-    <xlsx-parse :file="file">
+    <xlsx-read :file="file">
       <xlsx-sheets>
         <template #default="{sheets}">
           <select v-model="selectedSheet">
@@ -19,19 +19,19 @@
           </div>
         </template>
       </xlsx-json>
-    </xlsx-parse>
+    </xlsx-read>
   </div>
 </template>
 
 <script>
-import XlsxParse from "./components/XlsxParse";
+import XlsxRead from "./components/XlsxRead";
 import XlsxTable from "./components/XlsxTable";
 import XlsxSheets from "./components/XlsxSheets";
 import XlsxJson from "./components/XlsxJson";
 
 export default {
   components: {
-    XlsxParse,
+    XlsxRead,
     XlsxTable,
     XlsxSheets,
     XlsxJson
