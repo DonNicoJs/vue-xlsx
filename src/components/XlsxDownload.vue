@@ -1,3 +1,9 @@
+<template>
+  <div v-if="loaded" @click="download">
+    <slot></slot>
+  </div>
+</template>
+
 <script>
 export default {
   inject: ["getWorkbook"],
@@ -24,7 +30,9 @@ export default {
       immediate: true,
       handler(loaded) {
         if (loaded) {
-          this.getWorkbook(this.download);
+          this.getWorkbook(wb => {
+            this._workbook = wb;
+          });
         }
       }
     }
@@ -35,9 +43,8 @@ export default {
       this._writeFile = writeFile;
       this.loaded = true;
     },
-    download(workbook) {
-      console.log(workbook);
-      this._writeFile(workbook, this.filename, this.options);
+    download() {
+      this._writeFile(this._workbook, this.filename, this.options);
     }
   },
   render() {

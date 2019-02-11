@@ -1,7 +1,9 @@
 <template>
   <div class="VueXlsx">
     <xlsx-write :collection="[{ a: 1, b: 2 }]">
-      <xlsx-download />
+      <xlsx-download>
+        <button>Download</button>
+      </xlsx-download>
     </xlsx-write>
     <input type="file" @change="onChange" />
     <xlsx-read :file="file">
