@@ -4,6 +4,10 @@ export default {
     sheet: {
       type: [String, Number],
       default: 0
+    },
+    options: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {

@@ -26,7 +26,7 @@ export default {
     },
     updateTable(workbook) {
       const ws = workbook.Sheets[this.sheetNameFinder(workbook)];
-      this.table = this._sheet_to_html(ws);
+      this.table = this._sheet_to_html(ws, this.options);
     }
   }
 };

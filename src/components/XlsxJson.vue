@@ -22,7 +22,7 @@ export default {
     },
     updateJson(workbook) {
       const ws = workbook.Sheets[this.sheetNameFinder(workbook)];
-      this.collection = this._sheet_to_json(ws);
+      this.collection = this._sheet_to_json(ws, this.options);
       this.$emit("parsed", this.collection);
     }
   },
