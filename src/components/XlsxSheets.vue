@@ -20,8 +20,12 @@ export default {
     }
   },
   render(h) {
-    if (this.$slots.default) {
-      return h("div", this.$slots.default);
+    if (this.$scopedSlots.default) {
+      return h("div", [
+        this.$scopedSlots.default({
+          sheets: this.sheets
+        })
+      ]);
     }
     return null;
   }

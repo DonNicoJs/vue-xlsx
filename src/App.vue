@@ -2,8 +2,16 @@
   <div class="VueXlsx">
     <input type="file" @change="onChange" />
     <xlsx-parse :file="file">
-      <xlsx-sheets :sheets.sync="sheets" />
-      <xlsx-table :sheet="sheets[0]" />>
+      <xlsx-sheets :sheets.sync="sheets">
+        <template #default="{sheets}">
+          <select>
+            <option v-for="sheet in sheets" :key="sheet" :value="sheet">
+              {{ sheet }}
+            </option>
+          </select>
+        </template>
+      </xlsx-sheets>
+      <xlsx-table :sheet="sheets[0]" />
     </xlsx-parse>
   </div>
 </template>
