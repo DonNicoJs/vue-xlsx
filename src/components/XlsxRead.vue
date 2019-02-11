@@ -5,25 +5,23 @@
 </template>
 
 <script>
+import WorkbookHandler from "@/mixins/WorkbookHandler";
+
 export default {
+  mixins: [WorkbookHandler],
   props: {
     file: {
       type: File,
       default: null
     }
   },
-  data() {
-    return {
-      libLoaded: false
-    };
-  },
   computed: {
-    loadedAndfile() {
+    loadedAndFile() {
       return this.libLoaded ? this.file : null;
     }
   },
   watch: {
-    loadedAndfile: {
+    loadedAndFile: {
       immediate: true,
       handler(file) {
         if (file) {
@@ -35,28 +33,12 @@ export default {
   mounted() {
     this.load();
   },
-  provide() {
-    return {
-      getWorkbook: this.getWorkbook
-    };
-  },
   methods: {
     async load() {
       const { read } = await import("xlsx");
       this._read = read;
       this.libLoaded = true;
       this._callbackQueue = [];
-    },
-    fireCallBacks() {
-      if (this._callbackQueue && Array.isArray(this._callbackQueue)) {
-        this._callbackQueue.forEach(cb => {
-          try {
-            cb(this._workbook);
-          } catch (e) {
-            console.warning("error in firing callbacks", e);
-          }
-        });
-      }
     },
     parseFile(file) {
       const reader = new FileReader();
@@ -75,15 +57,7 @@ export default {
         console.log(e);
       };
       reader.readAsArrayBuffer(file);
-    },
-    getWorkbook(cb) {
-      this._callbackQueue.push(cb);
-      if (this._workbook) {
-        cb(this._workbook);
-      }
     }
   }
 };
 </script>
-
-<style></style>
