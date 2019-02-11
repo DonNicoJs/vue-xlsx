@@ -1,5 +1,8 @@
 <template>
   <div class="VueXlsx">
+    <xlsx-write :collection="[{ a: 1, b: 2 }]">
+      <xlsx-download />
+    </xlsx-write>
     <input type="file" @change="onChange" />
     <xlsx-read :file="file">
       <xlsx-sheets>
@@ -28,13 +31,17 @@ import XlsxRead from "./components/XlsxRead";
 import XlsxTable from "./components/XlsxTable";
 import XlsxSheets from "./components/XlsxSheets";
 import XlsxJson from "./components/XlsxJson";
+import XlsxWrite from "./components/XlsxWrite";
+import XlsxDownload from "./components/XlsxDownload";
 
 export default {
   components: {
     XlsxRead,
     XlsxTable,
     XlsxSheets,
-    XlsxJson
+    XlsxJson,
+    XlsxWrite,
+    XlsxDownload
   },
   data() {
     return {
