@@ -3,37 +3,18 @@
 </template>
 
 <script>
+import SheetTo from "@/mixins/SheetTo";
+
 export default {
-  inject: ["getWorkbook"],
-  props: {
-    sheet: {
-      type: [String, Number],
-      default: 0
-    }
-  },
+  mixins: [SheetTo],
   data() {
     return {
-      table: null,
-      loaded: false
+      table: null
     };
   },
-  computed: {
-    loadedAndSheet() {
-      return this.loaded ? this.sheet : null;
-    }
-  },
   mounted() {
+    this._callBack = this.updateTable;
     this.load();
-  },
-  watch: {
-    loadedAndSheet: {
-      immediate: true,
-      handler(sheet) {
-        if (sheet !== null) {
-          this.getWorkbook(this.updateTable);
-        }
-      }
-    }
   },
   methods: {
     async load() {
@@ -44,10 +25,7 @@ export default {
       this.loaded = true;
     },
     updateTable(workbook) {
-      const sheetName = Number.isInteger(this.sheet)
-        ? workbook.SheetNames[this.sheet]
-        : this.sheet;
-      const ws = workbook.Sheets[sheetName];
+      const ws = workbook.Sheets[this.sheetNameFinder(workbook)];
       this.table = this._sheet_to_html(ws);
     }
   }
