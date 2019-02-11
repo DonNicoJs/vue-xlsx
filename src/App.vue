@@ -12,6 +12,13 @@
         </template>
       </xlsx-sheets>
       <xlsx-table :sheet="selectedSheet" />
+      <xlsx-json :sheet="selectedSheet">
+        <template #default="{collection}">
+          <div>
+            {{ collection }}
+          </div>
+        </template>
+      </xlsx-json>
     </xlsx-parse>
   </div>
 </template>
@@ -20,12 +27,14 @@
 import XlsxParse from "./components/XlsxParse";
 import XlsxTable from "./components/XlsxTable";
 import XlsxSheets from "./components/XlsxSheets";
+import XlsxJson from "./components/XlsxJson";
 
 export default {
   components: {
     XlsxParse,
     XlsxTable,
-    XlsxSheets
+    XlsxSheets,
+    XlsxJson
   },
   data() {
     return {
