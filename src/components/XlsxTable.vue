@@ -7,7 +7,7 @@ export default {
   inject: ["getWorkbook"],
   props: {
     sheet: {
-      type: Number,
+      type: [String, Number],
       default: 0
     }
   },
@@ -44,7 +44,9 @@ export default {
       this.loaded = true;
     },
     updateTable(workbook) {
-      const sheetName = workbook.SheetNames[this.sheet];
+      const sheetName = Number.isInteger(this.sheet)
+        ? workbook.SheetNames[this.sheet]
+        : this.sheet;
       const ws = workbook.Sheets[sheetName];
       this.table = this._sheet_to_html(ws);
     }
