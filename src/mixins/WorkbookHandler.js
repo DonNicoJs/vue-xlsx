@@ -22,7 +22,9 @@ export default {
       }
     },
     getWorkbook(cb) {
-      this._callbackQueue.push(cb);
+      if (this._callbackQueue) {
+        this._callbackQueue.push(cb);
+      }
       if (this._workbook) {
         cb(this._workbook);
       }
