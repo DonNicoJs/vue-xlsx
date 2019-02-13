@@ -36,7 +36,7 @@ export default {
       } = await import("xlsx");
       this._book_new = book_new;
       this._book_append_sheet = book_append_sheet;
-      this._workbook = this._book_new();
+      this._workbook = this._book_new(this.options);
       this.libLoaded = true;
     },
     addSheet(sheet, sheetName) {
