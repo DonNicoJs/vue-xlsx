@@ -1,5 +1,5 @@
 export const typeFinder = value =>
-  Array.isArray(value) ? "array" : value instanceof Object ? "object" : false;
+  value instanceof Array ? "array" : value instanceof Object ? "object" : false;
 
 export const collectionValidator = collection => {
   return collection.reduce((a, c) => {
