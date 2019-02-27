@@ -1,22 +1,5 @@
-<template>
-  <div v-if="libLoaded">
-    <slot />
-  </div>
-</template>
-
 <script>
-const typeFinder = value =>
-  Array.isArray(value) ? "array" : value instanceof Object ? "object" : false;
-
-const collectionValidator = collection => {
-  return collection.reduce((a, c) => {
-    if (a === null) {
-      return typeFinder(c);
-    } else {
-      return typeFinder(c) === a ? a : false;
-    }
-  }, null);
-};
+import { collectionValidator, typeFinder } from "@/utils.js";
 
 export default {
   inject: ["getWorkbook", "addSheet", "deleteSheet"],
@@ -43,12 +26,12 @@ export default {
     };
   },
   computed: {
-    loadedAndCollection() {
+    readyToParse() {
       return this.libLoaded ? this.collection : null;
     }
   },
   watch: {
-    loadedAndCollection: {
+    readyToParse: {
       immediate: true,
       handler(collection) {
         if (collection) {
@@ -61,16 +44,15 @@ export default {
     this.load();
   },
   beforeDestroy() {
-    this.deleteSheet();
+    this.deleteSheet(this.sheetName);
   },
   methods: {
     async load() {
       const {
-        utils: { aoa_to_sheet, json_to_sheet, book_append_sheet }
+        utils: { aoa_to_sheet, json_to_sheet }
       } = await import("xlsx");
       this._aoa_to_sheet = aoa_to_sheet;
       this._json_to_sheet = json_to_sheet;
-      this._book_append_sheet = book_append_sheet;
       this.libLoaded = true;
       this.getWorkbook(wb => {
         this._workbook = wb;
@@ -86,8 +68,12 @@ export default {
       this.$emit("sheet:parsed", this._sheet);
       this.addSheet(this._sheet, this.sheetName);
     }
+  },
+  render(h) {
+    if (this.$slots.default && this.libLoaded) {
+      return h("div", this.$slots.default);
+    }
+    return null;
   }
 };
 </script>
-
-<style></style>
