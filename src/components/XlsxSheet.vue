@@ -1,5 +1,5 @@
 <script>
-import { collectionValidator, typeFinder } from "@/utils.js";
+import { collectionValidator, typeFinder } from "../utils.js";
 
 export default {
   inject: ["getWorkbook", "addSheet", "deleteSheet"],

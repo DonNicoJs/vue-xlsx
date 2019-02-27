@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import SheetTo from "@/mixins/SheetTo";
+import SheetTo from "../mixins/SheetTo";
 
 export default {
   mixins: [SheetTo],

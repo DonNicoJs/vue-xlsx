@@ -1,5 +1,5 @@
 <script>
-import WorkbookHandler from "@/mixins/WorkbookHandler";
+import WorkbookHandler from "../mixins/WorkbookHandler";
 
 export default {
   mixins: [WorkbookHandler],
