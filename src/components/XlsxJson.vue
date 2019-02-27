@@ -27,7 +27,7 @@ export default {
     }
   },
   render(h) {
-    if (this.$scopedSlots.default) {
+    if (this.$scopedSlots.default && this.loaded) {
       return h("div", [
         this.$scopedSlots.default({
           collection: this.collection

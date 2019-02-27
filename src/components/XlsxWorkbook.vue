@@ -1,9 +1,3 @@
-<template>
-  <div v-if="libLoaded">
-    <slot />
-  </div>
-</template>
-
 <script>
 import WorkbookHandler from "@/mixins/WorkbookHandler";
 
@@ -53,6 +47,12 @@ export default {
         this._workbook.Sheets[sheetName] = undefined;
       }
     }
+  },
+  render(h) {
+    if (this.$slots.default && this.libLoaded) {
+      return h("div", this.$slots.default);
+    }
+    return null;
   }
 };
 </script>

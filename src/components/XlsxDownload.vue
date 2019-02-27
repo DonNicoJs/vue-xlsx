@@ -1,9 +1,3 @@
-<template>
-  <div v-if="loaded" @click="download">
-    <slot></slot>
-  </div>
-</template>
-
 <script>
 export default {
   inject: ["getWorkbook"],
@@ -47,7 +41,18 @@ export default {
       this._writeFile(this._workbook, this.filename, this.options);
     }
   },
-  render() {
+  render(h) {
+    if (this.$slots.default && this.loaded) {
+      return h(
+        "div",
+        {
+          on: {
+            click: this.download
+          }
+        },
+        this.$slots.default
+      );
+    }
     return null;
   }
 };
