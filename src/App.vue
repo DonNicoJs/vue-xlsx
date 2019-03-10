@@ -6,6 +6,10 @@
         <input v-model="sheetName" placeholder="type a new sheet name" />
         <button v-if="sheetName" @click="addSheet">Add Sheet</button>
       </div>
+
+      <div>
+        <input type="file" @change="onJsonFileChange" />
+      </div>
       <div>Sheets: {{ sheets }}</div>
 
       <xlsx-workbook>
@@ -14,6 +18,11 @@
           v-for="sheet in sheets"
           :key="sheet.name"
           :sheet-name="sheet.name"
+        />
+        <xlsx-sheet
+          :collection="jsonFile"
+          v-if="jsonFile"
+          sheet-name="fromJson"
         />
         <xlsx-download>
           <button>Download</button>
@@ -72,12 +81,20 @@ export default {
       selectedSheet: null,
       sheetName: null,
       sheets: [{ name: "SheetOne", data: [{ c: 2 }] }],
-      collection: [{ a: 1, b: 2 }]
+      collection: [{ a: 1, b: 2 }],
+      jsonFile: null
     };
   },
   methods: {
     onChange(event) {
       this.file = event.target.files ? event.target.files[0] : null;
+    },
+    onJsonFileChange(event) {
+      const reader = new FileReader();
+      reader.onload = evt => {
+        this.jsonFile = JSON.parse(evt.target.result);
+      };
+      reader.readAsText(event.target.files[0]);
     },
     addSheet() {
       this.sheets.push({ name: this.sheetName, data: [...this.collection] });
