@@ -1,6 +1,6 @@
 {
   "name": "vue-xlsx",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "author": {
     "name": "Nicolo Maria Mezzopera",
@@ -58,7 +58,11 @@
       "pre-commit": "lint-staged"
     }
   },
-  "keywords": ["vue", "xlsx", "vuejs"],
+  "keywords": [
+    "vue",
+    "xlsx",
+    "vuejs"
+  ],
   "license": "MIT",
   "lint-staged": {
     "*.js": [
