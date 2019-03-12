@@ -1,3 +1,9 @@
+// Mini Global polyfill
+var global = global || window;
+if (window) {
+  window.global = global;
+}
+
 export * from "./utils";
 
 export { default as XlsxDownload } from "./components/XlsxDownload";
