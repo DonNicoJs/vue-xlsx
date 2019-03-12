@@ -3,17 +3,6 @@ import WorkbookHandler from "../mixins/WorkbookHandler";
 
 export default {
   mixins: [WorkbookHandler],
-  props: {
-    options: {
-      type: Object,
-      default: () => ({})
-    }
-  },
-  data() {
-    return {
-      libLoaded: false
-    };
-  },
   provide() {
     return {
       addSheet: this.addSheet,
@@ -30,13 +19,15 @@ export default {
       } = await import("xlsx");
       this._book_new = book_new;
       this._book_append_sheet = book_append_sheet;
-      this._workbook = this._book_new(this.options);
+      this._workbook = this._book_new();
+      this.$emit("created", this._workbook);
       this.libLoaded = true;
     },
     addSheet(sheet, sheetName) {
       if (this._workbook) {
         this.deleteSheet(sheetName);
         this._book_append_sheet(this._workbook, sheet, sheetName);
+        this.$emit("change", this._workbook);
       }
     },
     deleteSheet(sheetName) {
@@ -45,6 +36,7 @@ export default {
           s => s !== sheetName
         );
         this._workbook.Sheets[sheetName] = undefined;
+        this.$emit("change", this._workbook);
       }
     }
   },

@@ -65,7 +65,7 @@ export default {
         object: this._json_to_sheet
       };
       this._sheet = lib[type](collection, this.options);
-      this.$emit("sheet:parsed", this._sheet);
+      this.$emit("parsed", this._sheet);
       this.addSheet(this._sheet, this.sheetName);
     }
   },
