@@ -11,7 +11,7 @@
     "test:unit": "vue-cli-service test:unit",
     "docs:prepare": "yarn prepare && rm -rf docs/dist/ && mkdir docs/dist/ && cp -r dist docs/",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "yarn docs:prepare && vuepress build docs"
   },
   "dependencies": {},
   "devDependencies": {

@@ -1,34 +1,8 @@
-# vue-xlsx
+# XLSX Made easy
 
-## Project setup
-```
-yarn install
-```
+This vue Library is a vue wrapper for the excellent: [sheet-js](https://github.com/SheetJS/js-xlsx) The aim of this library is to provide an easy to use, well documented way to parse and create spreadsheets in vue.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## Documentation
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Check out our documentation at
