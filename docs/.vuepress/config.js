@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   title: 'Vue-XLSX',
+  base: 'vue-xlsx',
   description: 'XLSX made friendly by Vue',
   themeConfig: {
     sidebar: ['/', '/guide/', {
@@ -13,14 +14,5 @@ module.exports = {
       ]
     }],
     displayAllHeaders: true // Default: false
-  },
-  configureWebpack: (config) => {
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...config.resolve.alias,
-        'vue-xlsx': path.resolve(__dirname, '../dist/vue-xlsx.es.js')
-      }
-    }
   }
 };
