@@ -4,6 +4,10 @@ module.exports = {
   title: 'Vue-XLSX',
   description: 'XLSX made friendly by Vue',
   themeConfig: {
+    repo: 'DonNicoJs/vue-xlsx',
+    docsDir: 'docs',
+    editLinks: true,
+    editLinkText: 'Help us improve this page!',
     sidebar: ['/', '/guide/', {
       title: 'Components',
       sidebarDepth: 1,
