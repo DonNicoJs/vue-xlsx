@@ -5,7 +5,7 @@ export default {
   mixins: [WorkbookHandler],
   props: {
     file: {
-      type: File,
+      type: null,
       default: null
     }
   },
