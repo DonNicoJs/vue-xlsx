@@ -71,7 +71,7 @@
     ]
   },
   "main": "dist/vue-xlsx.cjs.js",
-  "unpkg": "dist/vue-xlsx.umd.min.js",
+  "unpkg": "dist/vue-xlsx.umd.js",
   "module": "dist/vue-xlsx.es.js",
   "sideEffects": false,
   "peerDependencies": {
