@@ -64,26 +64,17 @@ var script = {
   }
 };
 
-function normalizeComponent(
-  template,
-  style,
-  script,
-  scopeId,
-  isFunctionalTemplate,
-  moduleIdentifier,
-  /* server only */
-  shadowMode,
-  createInjector,
-  createInjectorSSR,
-  createInjectorShadow
-) {
-  if (typeof shadowMode !== "boolean") {
+function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+/* server only */
+, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+  if (typeof shadowMode !== 'boolean') {
     createInjectorSSR = createInjector;
     createInjector = shadowMode;
     shadowMode = false;
   } // Vue.extend constructor export interop.
 
-  var options = typeof script === "function" ? script.options : script; // render functions
+
+  var options = typeof script === 'function' ? script.options : script; // render functions
 
   if (template && template.render) {
     options.render = template.render;
@@ -95,6 +86,7 @@ function normalizeComponent(
     }
   } // scopedId
 
+
   if (scopeId) {
     options._scopeId = scopeId;
   }
@@ -105,19 +97,20 @@ function normalizeComponent(
     // server build
     hook = function hook(context) {
       // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
+      context = context || // cached call
+      this.$vnode && this.$vnode.ssrContext || // stateful
+      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
       // 2.2 with runInNewContext: true
 
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== "undefined") {
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
         context = __VUE_SSR_CONTEXT__;
       } // inject component styles
+
 
       if (style) {
         style.call(this, createInjectorSSR(context));
       } // register component module identifier for async chunk inference
+
 
       if (context && context._registeredComponents) {
         context._registeredComponents.add(moduleIdentifier);
@@ -125,18 +118,14 @@ function normalizeComponent(
     }; // used by ssr in case component is cached and beforeCreate
     // never gets called
 
+
     options._ssrRegister = hook;
   } else if (style) {
-    hook = shadowMode
-      ? function() {
-          style.call(
-            this,
-            createInjectorShadow(this.$root.$options.shadowRoot)
-          );
-        }
-      : function(context) {
-          style.call(this, createInjector(context));
-        };
+    hook = shadowMode ? function () {
+      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
+    } : function (context) {
+      style.call(this, createInjector(context));
+    };
   }
 
   if (hook) {
@@ -165,27 +154,29 @@ const __vue_script__ = script;
 
 /* template */
 
-/* style */
-const __vue_inject_styles__ = undefined;
-/* scoped */
-const __vue_scope_id__ = undefined;
-/* module identifier */
-const __vue_module_identifier__ = undefined;
-/* functional template */
-const __vue_is_functional_template__ = undefined;
-/* style inject */
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = undefined;
+  /* style inject */
+  
+  /* style inject SSR */
+  
 
-/* style inject SSR */
-
-var XlsxDownload = normalizeComponent_1(
-  {},
-  __vue_inject_styles__,
-  __vue_script__,
-  __vue_scope_id__,
-  __vue_is_functional_template__,
-  __vue_module_identifier__,
-  undefined,
-  undefined
-);
+  
+  var XlsxDownload = normalizeComponent_1(
+    {},
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
 
 export default XlsxDownload;

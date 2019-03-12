@@ -22,6 +22,5 @@ module.exports = {
         'vue-xlsx': path.resolve(__dirname, '../dist/vue-xlsx.es.js')
       }
     }
-    console.log(config)
   }
 };
