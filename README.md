@@ -5,4 +5,4 @@ This vue Library is a vue wrapper for the excellent: [sheet-js](https://github.c
 
 ## Documentation
 
-Check out our documentation at
+Check out our documentation at [https://vue-xlsx.netlify.com/](https://vue-xlsx.netlify.com/)
