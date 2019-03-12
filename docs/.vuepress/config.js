@@ -2,7 +2,6 @@ const path = require('path');
 
 module.exports = {
   title: 'Vue-XLSX',
-  base: 'vue-xlsx',
   description: 'XLSX made friendly by Vue',
   themeConfig: {
     sidebar: ['/', '/guide/', {
