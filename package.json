@@ -1,8 +1,13 @@
 {
   "name": "vue-xlsx",
   "version": "0.1.0",
-  "private": true,
-  "author": "Nicolo Maria Mezzopera",
+  "private": false,
+  "author": {
+    "name": "Nicolo Maria Mezzopera",
+    "email": "nicolo.mezzopera@gmail.com",
+    "url": "donnico.dev"
+  },
+  "homepage": "https://vue-xlsx.netlify.com/",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "rollup -c --environment NODE_ENV:production",
@@ -53,7 +58,7 @@
       "pre-commit": "lint-staged"
     }
   },
-  "keywords": [],
+  "keywords": ["vue", "xlsx", "vuejs"],
   "license": "MIT",
   "lint-staged": {
     "*.js": [
