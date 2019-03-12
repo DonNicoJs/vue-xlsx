@@ -9,6 +9,7 @@
     "prepare": "npm run build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
+    "docs:prepare": "yarn prepare && rm -rf docs/dist/ && mkdir docs/dist/ && cp -r dist docs/",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
@@ -38,7 +39,7 @@
     "rollup-plugin-vue": "^4.7.2",
     "vue": "^2.6.8",
     "vue-template-compiler": "^2.6.8",
-    "vuepress": "^0.14.10",
+    "vuepress": "^1.0.0-alpha.43",
     "xlsx": "^0.14.1"
   },
   "resolutions": {

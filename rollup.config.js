@@ -3,7 +3,6 @@ import replace from "rollup-plugin-replace";
 import node from "rollup-plugin-node-resolve";
 import cjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
-
 import copy from "rollup-copy-plugin";
 
 import fs from "fs";
@@ -31,10 +30,6 @@ const mapEntry = (f, ext, folder) => ({
     vue({
       css: true,
       compileTemplate: true
-    }),
-    babel({
-      exclude: "node_modules/**",
-      runtimeHelpers: true
     })
   ]
 });
@@ -50,11 +45,11 @@ export default [
       file: `dist/utils.js`
     },
     plugins: [
-      cjs(),
-      babel({
-        exclude: "node_modules/**",
-        runtimeHelpers: true
+      replace({ "process.env.NODE_ENV": "production" }),
+      node({
+        extensions: [".vue", ".js"]
       }),
+      cjs(),
       copy({
         "src/index.js": "dist/vue-xlsx.es.js"
       })
