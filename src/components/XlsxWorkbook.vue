@@ -1,4 +1,5 @@
 <script>
+import { globalPolyfill } from "../polyfills";
 import WorkbookHandler from "../mixins/WorkbookHandler";
 
 export default {
@@ -10,6 +11,7 @@ export default {
     };
   },
   mounted() {
+    globalPolyfill();
     this.load();
   },
   methods: {
