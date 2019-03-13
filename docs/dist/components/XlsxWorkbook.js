@@ -1,3 +1,10 @@
+const globalPolyfill = () => {
+  var global = global || window;
+  if (window) {
+    window.global = global;
+  }
+};
+
 var WorkbookHandler = {
   data() {
     return {
@@ -41,6 +48,7 @@ var script = {
     };
   },
   mounted() {
+    globalPolyfill();
     this.load();
   },
   methods: {

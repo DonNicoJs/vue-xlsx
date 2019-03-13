@@ -2854,6 +2854,14 @@
     };
   });
 
+  var globalPolyfill = function globalPolyfill() {
+    var global = global || window;
+
+    if (window) {
+      window.global = global;
+    }
+  };
+
   var ITERATOR$4 = _wks('iterator');
   var TO_STRING_TAG = _wks('toStringTag');
   var ArrayValues = _iterators.Array;
@@ -2967,6 +2975,7 @@
       }
     },
     mounted: function mounted() {
+      globalPolyfill();
       this.load();
     },
     methods: {
@@ -3413,6 +3422,7 @@
       };
     },
     mounted: function mounted() {
+      globalPolyfill();
       this.load();
     },
     methods: {
@@ -3511,13 +3521,6 @@
       undefined,
       undefined
     );
-
-  // Mini Global polyfill
-  var global = global || window;
-
-  if (window) {
-    window.global = global;
-  }
 
   exports.XlsxDownload = XlsxDownload;
   exports.XlsxJson = XlsxJson;

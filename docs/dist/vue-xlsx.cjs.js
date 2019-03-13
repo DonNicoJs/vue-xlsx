@@ -2852,6 +2852,14 @@ _typedArray('Uint8', 1, function (init) {
   };
 });
 
+var globalPolyfill = function globalPolyfill() {
+  var global = global || window;
+
+  if (window) {
+    window.global = global;
+  }
+};
+
 var ITERATOR$4 = _wks('iterator');
 var TO_STRING_TAG = _wks('toStringTag');
 var ArrayValues = _iterators.Array;
@@ -2965,6 +2973,7 @@ var script$2 = {
     }
   },
   mounted: function mounted() {
+    globalPolyfill();
     this.load();
   },
   methods: {
@@ -3411,6 +3420,7 @@ var script$6 = {
     };
   },
   mounted: function mounted() {
+    globalPolyfill();
     this.load();
   },
   methods: {
@@ -3509,13 +3519,6 @@ const __vue_script__$6 = script$6;
     undefined,
     undefined
   );
-
-// Mini Global polyfill
-var global = global || window;
-
-if (window) {
-  window.global = global;
-}
 
 exports.XlsxDownload = XlsxDownload;
 exports.XlsxJson = XlsxJson;
