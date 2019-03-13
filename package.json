@@ -29,6 +29,7 @@
     "@vue/cli-service": "^3.5.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "^1.0.0-beta.20",
+    "@vuepress/plugin-google-analytics": "^1.0.0-alpha.44",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.3.1",
     "eslint": "^5.15.1",
@@ -77,7 +78,9 @@
   "main": "dist/vue-xlsx.cjs.js",
   "unpkg": "dist/vue-xlsx.umd.js",
   "module": "dist/vue-xlsx.es.js",
-  "sideEffects": ["polyfills.js"],
+  "sideEffects": [
+    "polyfills.js"
+  ],
   "peerDependencies": {
     "vue": "^2.5.17",
     "xlsx": "^0.14.1"

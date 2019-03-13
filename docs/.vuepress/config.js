@@ -17,5 +17,13 @@ module.exports = {
       ]
     }],
     displayAllHeaders: true // Default: false
-  }
+  },
+  plugins: [
+    [
+      '@vuepress/google-analytics',
+      {
+        'ga': 'UA-136143492-1'
+      }
+    ]
+  ]
 };
