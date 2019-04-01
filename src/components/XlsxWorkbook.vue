@@ -1,5 +1,4 @@
 <script>
-import { globalPolyfill } from "../polyfills";
 import WorkbookHandler from "../mixins/WorkbookHandler";
 
 export default {
@@ -11,11 +10,12 @@ export default {
     };
   },
   mounted() {
-    globalPolyfill();
     this.load();
   },
   methods: {
     async load() {
+      const { globalPolyfill } = require("../polyfills");
+      globalPolyfill();
       const {
         utils: { book_new, book_append_sheet }
       } = await import("xlsx");

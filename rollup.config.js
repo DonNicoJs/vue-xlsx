@@ -51,7 +51,8 @@ export default [
       }),
       cjs(),
       copy({
-        "src/index.js": "dist/vue-xlsx.es.js"
+        "src/index.js": "dist/vue-xlsx.es.js",
+        "src/polyfills.js": "dist/polyfills.js"
       })
     ]
   },
