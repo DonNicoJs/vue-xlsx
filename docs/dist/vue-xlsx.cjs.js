@@ -776,6 +776,40 @@ function _asyncToGenerator(fn) {
   };
 }
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
 }
@@ -2947,6 +2981,12 @@ var script$2 = {
     file: {
       type: null,
       default: null
+    },
+    options: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
     }
   },
   computed: {
@@ -3018,9 +3058,9 @@ var script$2 = {
           binary += String.fromCharCode(bytes[i]);
         }
 
-        _this._workbook = _this._read(binary, {
+        _this._workbook = _this._read(binary, _objectSpread({
           type: "binary"
-        });
+        }, _this.options));
 
         _this.fireCallBacks();
 
