@@ -9,6 +9,7 @@ This is the basic `import` component it gets an xlsx file and converts it in a j
 | Name| Type| Default|Description|
 | :--: |:--:|:--:| :--:|
 | file   | `File` | `null` | the file to parse from |
+| options   | `Object` | `{}` | [options object](https://github.com/SheetJS/js-xlsx#parsing-options) to pass to the parse function |
 
 ### Events
 

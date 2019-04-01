@@ -7,6 +7,10 @@ export default {
     file: {
       type: null,
       default: null
+    },
+    options: {
+      type: Object,
+      default: () => ({})
     }
   },
   computed: {
@@ -45,7 +49,10 @@ export default {
         for (var i = 0; i < length; i++) {
           binary += String.fromCharCode(bytes[i]);
         }
-        this._workbook = this._read(binary, { type: "binary" });
+        this._workbook = this._read(binary, {
+          type: "binary",
+          ...this.options
+        });
         this.fireCallBacks();
         this.$emit("parsed", this._workbook);
       };
