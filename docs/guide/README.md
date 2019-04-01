@@ -43,8 +43,6 @@ import XlsxJson from "./components/XlsxJson";
 export default {
   components: {
     XlsxRead,
-    XlsxTable,
-    XlsxSheets,
     XlsxJson
   },
   data() {
@@ -62,7 +60,7 @@ export default {
 ```
 
 ::: tip
-In this example we are using `xlsx-read` to take a file of the xlsx and transforms it in a json via `xlsx-json`
+In this example we are using `xlsx-read` to take a sheet of the xlsx and transforms it in a json via `xlsx-json`
 :::
 
 ### Exporting an XLSX file

@@ -2854,14 +2854,6 @@
     };
   });
 
-  var globalPolyfill = function globalPolyfill() {
-    var global = global || window;
-
-    if (window) {
-      window.global = global;
-    }
-  };
-
   var ITERATOR$4 = _wks('iterator');
   var TO_STRING_TAG = _wks('toStringTag');
   var ArrayValues = _iterators.Array;
@@ -2975,7 +2967,6 @@
       }
     },
     mounted: function mounted() {
-      globalPolyfill();
       this.load();
     },
     methods: {
@@ -2983,23 +2974,25 @@
         var _load = _asyncToGenerator(
         /*#__PURE__*/
         regeneratorRuntime.mark(function _callee() {
-          var _ref, read;
+          var _require, globalPolyfill, _ref, read;
 
           return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _context.next = 2;
+                  _require = require("../polyfills"), globalPolyfill = _require.globalPolyfill;
+                  globalPolyfill();
+                  _context.next = 4;
                   return import("xlsx");
 
-                case 2:
+                case 4:
                   _ref = _context.sent;
                   read = _ref.read;
                   this._read = read;
                   this.libLoaded = true;
                   this._callbackQueue = [];
 
-                case 7:
+                case 9:
                 case "end":
                   return _context.stop();
               }
@@ -3422,7 +3415,6 @@
       };
     },
     mounted: function mounted() {
-      globalPolyfill();
       this.load();
     },
     methods: {
@@ -3430,16 +3422,18 @@
         var _load = _asyncToGenerator(
         /*#__PURE__*/
         regeneratorRuntime.mark(function _callee() {
-          var _ref, _ref$utils, book_new, book_append_sheet;
+          var _require, globalPolyfill, _ref, _ref$utils, book_new, book_append_sheet;
 
           return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _context.next = 2;
+                  _require = require("../polyfills"), globalPolyfill = _require.globalPolyfill;
+                  globalPolyfill();
+                  _context.next = 4;
                   return import("xlsx");
 
-                case 2:
+                case 4:
                   _ref = _context.sent;
                   _ref$utils = _ref.utils;
                   book_new = _ref$utils.book_new;
@@ -3450,7 +3444,7 @@
                   this.$emit("created", this._workbook);
                   this.libLoaded = true;
 
-                case 11:
+                case 13:
                 case "end":
                   return _context.stop();
               }

@@ -1,10 +1,3 @@
-const globalPolyfill = () => {
-  var global = global || window;
-  if (window) {
-    window.global = global;
-  }
-};
-
 var WorkbookHandler = {
   data() {
     return {
@@ -48,11 +41,12 @@ var script = {
     };
   },
   mounted() {
-    globalPolyfill();
     this.load();
   },
   methods: {
     async load() {
+      const { globalPolyfill } = require("../polyfills");
+      globalPolyfill();
       const {
         utils: { book_new, book_append_sheet }
       } = await import("xlsx");
