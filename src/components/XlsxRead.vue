@@ -41,6 +41,7 @@ export default {
       this._callbackQueue = [];
     },
     parseFile(file) {
+      this.startLoading();
       const reader = new FileReader();
       reader.onload = e => {
         let binary = "";
@@ -55,6 +56,7 @@ export default {
         });
         this.fireCallBacks();
         this.$emit("parsed", this._workbook);
+        this.endLoading();
       };
       reader.onerror = e => {
         console.log(e);
@@ -63,8 +65,12 @@ export default {
     }
   },
   render(h) {
-    if (this.$slots.default && this.libLoaded) {
-      return h("div", this.$slots.default);
+    if (this.$scopedSlots.default && this.libLoaded) {
+      return h("div", [
+        this.$scopedSlots.default({
+          loading: this.loading
+        })
+      ]);
     }
     return null;
   }
