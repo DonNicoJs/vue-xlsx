@@ -34,23 +34,26 @@
       <h3>Import XLSX</h3>
       <input type="file" @change="onChange" />
       <xlsx-read :file="file">
-        <xlsx-sheets>
-          <template #default="{sheets}">
-            <select v-model="selectedSheet">
-              <option v-for="sheet in sheets" :key="sheet" :value="sheet">
-                {{ sheet }}
-              </option>
-            </select>
-          </template>
-        </xlsx-sheets>
-        <xlsx-table :sheet="selectedSheet" />
-        <xlsx-json :sheet="selectedSheet">
-          <template #default="{collection}">
-            <div>
-              {{ collection }}
-            </div>
-          </template>
-        </xlsx-json>
+        <template #default="{loading}">
+          <span v-if="loading">Loading...</span>
+          <xlsx-sheets>
+            <template #default="{sheets}">
+              <select v-model="selectedSheet">
+                <option v-for="sheet in sheets" :key="sheet" :value="sheet">
+                  {{ sheet }}
+                </option>
+              </select>
+            </template>
+          </xlsx-sheets>
+          <xlsx-table :sheet="selectedSheet" />
+          <xlsx-json :sheet="selectedSheet">
+            <template #default="{collection}">
+              <div>
+                {{ collection }}
+              </div>
+            </template>
+          </xlsx-json>
+        </template>
       </xlsx-read>
     </section>
   </div>
