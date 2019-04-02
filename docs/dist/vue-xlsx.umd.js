@@ -2943,7 +2943,8 @@
   var WorkbookHandler = {
     data: function data() {
       return {
-        libLoaded: false
+        libLoaded: false,
+        loading: false
       };
     },
     provide: function provide() {
@@ -2952,6 +2953,14 @@
       };
     },
     methods: {
+      startLoading: function startLoading() {
+        this.loading = true;
+        this.$emit("loading", this.loading);
+      },
+      endLoading: function endLoading() {
+        this.loading = false;
+        this.$emit("loading", this.loading);
+      },
       fireCallBacks: function fireCallBacks() {
         var _this = this;
 
@@ -3049,6 +3058,7 @@
       parseFile: function parseFile(file) {
         var _this = this;
 
+        this.startLoading();
         var reader = new FileReader();
 
         reader.onload = function (e) {
@@ -3067,6 +3077,8 @@
           _this.fireCallBacks();
 
           _this.$emit("parsed", _this._workbook);
+
+          _this.endLoading();
         };
 
         reader.onerror = function (e) {
@@ -3077,8 +3089,10 @@
       }
     },
     render: function render(h) {
-      if (this.$slots.default && this.libLoaded) {
-        return h("div", this.$slots.default);
+      if (this.$scopedSlots.default && this.libLoaded) {
+        return h("div", [this.$scopedSlots.default({
+          loading: this.loading
+        })]);
       }
 
       return null;

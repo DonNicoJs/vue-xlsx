@@ -1,7 +1,8 @@
 var WorkbookHandler = {
   data() {
     return {
-      libLoaded: false
+      libLoaded: false,
+      loading: false
     };
   },
   provide() {
@@ -10,6 +11,14 @@ var WorkbookHandler = {
     };
   },
   methods: {
+    startLoading() {
+      this.loading = true;
+      this.$emit("loading", this.loading);
+    },
+    endLoading() {
+      this.loading = false;
+      this.$emit("loading", this.loading);
+    },
     fireCallBacks() {
       if (this._callbackQueue && Array.isArray(this._callbackQueue)) {
         this._callbackQueue.forEach(cb => {

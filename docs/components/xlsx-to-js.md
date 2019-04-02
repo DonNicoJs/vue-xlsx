@@ -16,6 +16,15 @@ This is the basic `import` component it gets an xlsx file and converts it in a j
 | Name | Payload |Description|
 | :--: | :--:| :--: |
 | parsed | workbook | emit the processed workbook when ready |
+| loading | loading | emit at the start and end of the parsing process |
+
+### Scoped Slots
+
+#### Default
+
+| Name | Value |Description|
+| :--: | :--:| :--: |
+| loading | `Boolean` | loading state |
 
 ### Example
 

@@ -2,7 +2,11 @@
   <div>
       <h3>Import XLSX</h3>
       <input type="file" @change="onChange" />
-      <xlsx-read :file="file" />
+      <xlsx-read :file="file" >
+        <template #default="{loading}">
+          <span v-if="loading">Loading...</span>
+        </template>
+      </xlsx-read>
   </div>
 </template>
 

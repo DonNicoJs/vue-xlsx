@@ -2941,7 +2941,8 @@ for (var collections = _objectKeys(DOMIterables), i$1 = 0; i$1 < collections.len
 var WorkbookHandler = {
   data: function data() {
     return {
-      libLoaded: false
+      libLoaded: false,
+      loading: false
     };
   },
   provide: function provide() {
@@ -2950,6 +2951,14 @@ var WorkbookHandler = {
     };
   },
   methods: {
+    startLoading: function startLoading() {
+      this.loading = true;
+      this.$emit("loading", this.loading);
+    },
+    endLoading: function endLoading() {
+      this.loading = false;
+      this.$emit("loading", this.loading);
+    },
     fireCallBacks: function fireCallBacks() {
       var _this = this;
 
@@ -3047,6 +3056,7 @@ var script$2 = {
     parseFile: function parseFile(file) {
       var _this = this;
 
+      this.startLoading();
       var reader = new FileReader();
 
       reader.onload = function (e) {
@@ -3065,6 +3075,8 @@ var script$2 = {
         _this.fireCallBacks();
 
         _this.$emit("parsed", _this._workbook);
+
+        _this.endLoading();
       };
 
       reader.onerror = function (e) {
@@ -3075,8 +3087,10 @@ var script$2 = {
     }
   },
   render: function render(h) {
-    if (this.$slots.default && this.libLoaded) {
-      return h("div", this.$slots.default);
+    if (this.$scopedSlots.default && this.libLoaded) {
+      return h("div", [this.$scopedSlots.default({
+        loading: this.loading
+      })]);
     }
 
     return null;

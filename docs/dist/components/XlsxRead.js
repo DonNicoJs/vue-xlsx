@@ -1,7 +1,8 @@
 var WorkbookHandler = {
   data() {
     return {
-      libLoaded: false
+      libLoaded: false,
+      loading: false
     };
   },
   provide() {
@@ -10,6 +11,14 @@ var WorkbookHandler = {
     };
   },
   methods: {
+    startLoading() {
+      this.loading = true;
+      this.$emit("loading", this.loading);
+    },
+    endLoading() {
+      this.loading = false;
+      this.$emit("loading", this.loading);
+    },
     fireCallBacks() {
       if (this._callbackQueue && Array.isArray(this._callbackQueue)) {
         this._callbackQueue.forEach(cb => {
@@ -72,6 +81,7 @@ var script = {
       this._callbackQueue = [];
     },
     parseFile(file) {
+      this.startLoading();
       const reader = new FileReader();
       reader.onload = e => {
         let binary = "";
@@ -86,6 +96,7 @@ var script = {
         });
         this.fireCallBacks();
         this.$emit("parsed", this._workbook);
+        this.endLoading();
       };
       reader.onerror = e => {
         console.log(e);
@@ -94,8 +105,12 @@ var script = {
     }
   },
   render(h) {
-    if (this.$slots.default && this.libLoaded) {
-      return h("div", this.$slots.default);
+    if (this.$scopedSlots.default && this.libLoaded) {
+      return h("div", [
+        this.$scopedSlots.default({
+          loading: this.loading
+        })
+      ]);
     }
     return null;
   }
