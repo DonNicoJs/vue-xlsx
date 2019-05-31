@@ -11,4 +11,4 @@ const collectionValidator = collection => {
   }, null);
 };
 
-export { typeFinder, collectionValidator };
+export { collectionValidator, typeFinder };

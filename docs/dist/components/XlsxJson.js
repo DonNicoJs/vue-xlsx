@@ -59,7 +59,7 @@ var script = {
     async load() {
       const {
         utils: { sheet_to_json }
-      } = await import("xlsx");
+      } = await import('xlsx');
       this._sheet_to_json = sheet_to_json;
       this.loaded = true;
     },

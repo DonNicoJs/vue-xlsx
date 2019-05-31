@@ -60,7 +60,7 @@ var script = {
     async load() {
       const {
         utils: { aoa_to_sheet, json_to_sheet }
-      } = await import("xlsx");
+      } = await import('xlsx');
       this._aoa_to_sheet = aoa_to_sheet;
       this._json_to_sheet = json_to_sheet;
       this.libLoaded = true;

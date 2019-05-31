@@ -61,7 +61,7 @@ var script = {
     async load() {
       const {
         utils: { sheet_to_html }
-      } = await import("xlsx");
+      } = await import('xlsx');
       this._sheet_to_html = sheet_to_html;
       this.loaded = true;
     },

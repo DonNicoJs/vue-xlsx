@@ -36,7 +36,7 @@ var script = {
   },
   methods: {
     async load() {
-      const { writeFile } = await import("xlsx");
+      const { writeFile } = await import('xlsx');
       this._writeFile = writeFile;
       this.loaded = true;
     },

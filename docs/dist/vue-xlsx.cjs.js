@@ -187,14 +187,22 @@ var runtime = createCommonjsModule(function (module) {
         return Promise.resolve(value).then(function(unwrapped) {
           // When a yielded Promise is resolved, its final value becomes
           // the .value of the Promise<{value,done}> result for the
-          // current iteration.
+          // current iteration. If the Promise is rejected, however, the
+          // result for this iteration will be rejected with the same
+          // reason. Note that rejections of yielded Promises are not
+          // thrown back into the generator function, as is the case
+          // when an awaited Promise is rejected. This difference in
+          // behavior between yield and await is important, because it
+          // allows the consumer to decide what to do with the yielded
+          // rejection (swallow it and continue, manually .throw it back
+          // into the generator, abandon iteration, whatever). With
+          // await, by contrast, there is no opportunity to examine the
+          // rejection reason outside the generator function, so the
+          // only option is to throw it from the await expression, and
+          // let the generator function handle the exception.
           result.value = unwrapped;
           resolve(result);
-        }, function(error) {
-          // If a rejected Promise was yielded, throw the rejection back
-          // into the async generator function so it can be handled there.
-          return invoke("throw", error, resolve, reject);
-        });
+        }, reject);
       }
     }
 
@@ -734,9 +742,7 @@ var runtime = createCommonjsModule(function (module) {
   // In sloppy mode, unbound `this` refers to the global object, fallback to
   // Function constructor if we're in global strict mode. That is sadly a form
   // of indirect eval which violates Content Security Policy.
-  (function() {
-    return this || (typeof self === "object" && self);
-  })() || Function("return this")()
+  (function() { return this })() || Function("return this")()
 );
 });
 
@@ -882,7 +888,7 @@ var script = {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return Promise.resolve(require("xlsx"));
+                return Promise.resolve(require('xlsx'));
 
               case 2:
                 _ref = _context.sent;
@@ -1154,7 +1160,7 @@ var store = _global[SHARED] || (_global[SHARED] = {});
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
   version: _core.version,
-  mode: _library ? 'pure' : 'global',
+  mode: 'global',
   copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 });
 });
@@ -1660,7 +1666,7 @@ var script$1 = {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return Promise.resolve(require("xlsx"));
+                return Promise.resolve(require('xlsx'));
 
               case 2:
                 _ref = _context.sent;
@@ -2289,7 +2295,7 @@ var _iterDefine = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORC
       // Set @@toStringTag to native iterators
       _setToStringTag(IteratorPrototype, TAG, true);
       // fix for some old engines
-      if (!_library && typeof IteratorPrototype[ITERATOR$2] != 'function') _hide(IteratorPrototype, ITERATOR$2, returnThis);
+      if (typeof IteratorPrototype[ITERATOR$2] != 'function') _hide(IteratorPrototype, ITERATOR$2, returnThis);
     }
   }
   // fix Array#{values, @@iterator}.name in V8 / FF
@@ -2298,7 +2304,7 @@ var _iterDefine = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORC
     $default = function values() { return $native.call(this); };
   }
   // Define iterator
-  if ((!_library || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR$2])) {
+  if (BUGGY || VALUES_BUG || !proto[ITERATOR$2]) {
     _hide(proto, ITERATOR$2, $default);
   }
   // Plug for library
@@ -2886,58 +2892,6 @@ _typedArray('Uint8', 1, function (init) {
   };
 });
 
-var ITERATOR$4 = _wks('iterator');
-var TO_STRING_TAG = _wks('toStringTag');
-var ArrayValues = _iterators.Array;
-
-var DOMIterables = {
-  CSSRuleList: true, // TODO: Not spec compliant, should be false.
-  CSSStyleDeclaration: false,
-  CSSValueList: false,
-  ClientRectList: false,
-  DOMRectList: false,
-  DOMStringList: false,
-  DOMTokenList: true,
-  DataTransferItemList: false,
-  FileList: false,
-  HTMLAllCollection: false,
-  HTMLCollection: false,
-  HTMLFormElement: false,
-  HTMLSelectElement: false,
-  MediaList: true, // TODO: Not spec compliant, should be false.
-  MimeTypeArray: false,
-  NamedNodeMap: false,
-  NodeList: true,
-  PaintRequestList: false,
-  Plugin: false,
-  PluginArray: false,
-  SVGLengthList: false,
-  SVGNumberList: false,
-  SVGPathSegList: false,
-  SVGPointList: false,
-  SVGStringList: false,
-  SVGTransformList: false,
-  SourceBufferList: false,
-  StyleSheetList: true, // TODO: Not spec compliant, should be false.
-  TextTrackCueList: false,
-  TextTrackList: false,
-  TouchList: false
-};
-
-for (var collections = _objectKeys(DOMIterables), i$1 = 0; i$1 < collections.length; i$1++) {
-  var NAME = collections[i$1];
-  var explicit = DOMIterables[NAME];
-  var Collection = _global[NAME];
-  var proto$1 = Collection && Collection.prototype;
-  var key$1;
-  if (proto$1) {
-    if (!proto$1[ITERATOR$4]) _hide(proto$1, ITERATOR$4, ArrayValues);
-    if (!proto$1[TO_STRING_TAG]) _hide(proto$1, TO_STRING_TAG, NAME);
-    _iterators[NAME] = ArrayValues;
-    if (explicit) for (key$1 in es6_array_iterator) if (!proto$1[key$1]) _redefine(proto$1, key$1, es6_array_iterator[key$1], true);
-  }
-}
-
 var WorkbookHandler = {
   data: function data() {
     return {
@@ -3030,7 +2984,7 @@ var script$2 = {
                 _require = require("../polyfills"), globalPolyfill = _require.globalPolyfill;
                 globalPolyfill();
                 _context.next = 4;
-                return Promise.resolve(require("xlsx"));
+                return Promise.resolve(require('xlsx'));
 
               case 4:
                 _ref = _context.sent;
@@ -3239,7 +3193,7 @@ var script$3 = {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return Promise.resolve(require("xlsx"));
+                return Promise.resolve(require('xlsx'));
 
               case 2:
                 _ref = _context.sent;
@@ -3397,7 +3351,7 @@ var script$5 = {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return Promise.resolve(require("xlsx"));
+                return Promise.resolve(require('xlsx'));
 
               case 2:
                 _ref = _context.sent;
@@ -3483,7 +3437,7 @@ var script$6 = {
                 _require = require("../polyfills"), globalPolyfill = _require.globalPolyfill;
                 globalPolyfill();
                 _context.next = 4;
-                return Promise.resolve(require("xlsx"));
+                return Promise.resolve(require('xlsx'));
 
               case 4:
                 _ref = _context.sent;
@@ -3568,6 +3522,8 @@ const __vue_script__$6 = script$6;
     undefined
   );
 
+exports.SheetToMixin = SheetTo;
+exports.WorkbookHandlerMixin = WorkbookHandler;
 exports.XlsxDownload = XlsxDownload;
 exports.XlsxJson = XlsxJson;
 exports.XlsxRead = XlsxRead;
@@ -3575,7 +3531,5 @@ exports.XlsxSheet = XlsxSheet;
 exports.XlsxSheets = XlsxSheets;
 exports.XlsxTable = XlsxTable;
 exports.XlsxWorkbook = XlsxWorkbook;
-exports.SheetToMixin = SheetTo;
-exports.WorkbookHandlerMixin = WorkbookHandler;
-exports.typeFinder = typeFinder;
 exports.collectionValidator = collectionValidator;
+exports.typeFinder = typeFinder;
