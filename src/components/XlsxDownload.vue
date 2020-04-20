@@ -51,7 +51,7 @@ export default {
     }
   },
   render(h) {
-    if (this.$scope.default && this.loaded) {
+    if (this.$slots.default && this.loaded) {
       return h(
         "div",
         {
@@ -59,7 +59,7 @@ export default {
             click: this.disableWrapperClick ? () => {} : this.download
           }
         },
-        [this.$scope.default]
+        [this.$slots.default]
       );
     }
     return null;
