@@ -13,6 +13,10 @@ export default {
     disableWrapperClick: {
       type: Boolean,
       default: false
+    },
+    extraWorkBookModifications: {
+      type: Function,
+      default: () => ({})
     }
   },
   data() {
@@ -42,11 +46,12 @@ export default {
       this.loaded = true;
     },
     download() {
+      this.extraWorkBookModifications(this._workbook);
       this._writeFile(this._workbook, this.filename, this.options);
     }
   },
   render(h) {
-    if (this.$scopedSlots.default && this.loaded) {
+    if (this.$scop.default && this.loaded) {
       return h(
         "div",
         {
@@ -54,11 +59,7 @@ export default {
             click: this.disableWrapperClick ? () => {} : this.download
           }
         },
-        [
-          this.$scopedSlots.default({
-            download: this.download
-          })
-        ]
+        [this.$scope.default]
       );
     }
     return null;
