@@ -51,7 +51,7 @@ export default {
     }
   },
   render(h) {
-    if (this.$scop.default && this.loaded) {
+    if (this.$scope.default && this.loaded) {
       return h(
         "div",
         {
