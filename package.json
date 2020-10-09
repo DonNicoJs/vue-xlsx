@@ -18,7 +18,9 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "yarn docs:prepare && vuepress build docs"
   },
-  "dependencies": {},
+  "dependencies": {
+    "xlsx": "^0.14.3"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -46,8 +48,7 @@
     "vue": "^2.6.10",
     "vue-server-renderer": "2.6.10",
     "vue-template-compiler": "^2.6.10",
-    "vuepress": "^0.14.11",
-    "xlsx": "^0.14.3"
+    "vuepress": "^0.14.11"
   },
   "resolutions": {
     "webpack-dev-middleware": "3.6.0"
