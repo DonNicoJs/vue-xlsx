@@ -13,7 +13,7 @@ or
 ```bash
 yarn add vue-xlsx
 ```
-
+> if you are using webpack should run `npm install xlsx` see [issues #585](https://github.com/SheetJS/sheetjs/issues/585#issuecomment-470404688)
 ## Quick Start
 
 `vue-xlsx` uses a completely modular approach, you can mix and match our components however you want to.
